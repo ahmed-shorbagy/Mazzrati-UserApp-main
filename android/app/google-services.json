@@ -1,0 +1,228 @@
+{
+  "project_info": {
+    "project_number": "271380736469",
+    "firebase_url": "https://beytiarabia-default-rtdb.firebaseio.com",
+    "project_id": "beytiarabia",
+    "storage_bucket": "beytiarabia.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:271380736469:android:052e0169c7fba3d9a3755c",
+        "android_client_info": {
+          "package_name": "com.beytiarabia.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "271380736469-8jk7gk9r46l6rd0qdb3k8pp8l57m0led.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.beytiarabia.app",
+            "certificate_hash": "3d1193bbcb212a5626adadcaf8487b94d0c758e3"
+          }
+        },
+        {
+          "client_id": "271380736469-muocmkhd7mtc2ek5o5q4v984ncm6vpos.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.beytiarabia.app",
+            "certificate_hash": "2648969c10a1064cf318a51c994cbc1f92e86c14"
+          }
+        },
+        {
+          "client_id": "271380736469-u8c6vefbrpcgnc15n5bsl1svanmkhle1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.beytiarabia.app",
+            "certificate_hash": "6615249756ca1d1437344ef98fca469e023e428d"
+          }
+        },
+        {
+          "client_id": "271380736469-vvpspqsarjci69pi5nj2k5afldccb1mh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.beytiarabia.app",
+            "certificate_hash": "55f2c3f4a3a9feb3d06d1c54bfc99c1b9e220e7a"
+          }
+        },
+        {
+          "client_id": "271380736469-hkt0u5m6fvk0eov845kim6phd3f35seg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD57bzQp-wwWq2tZDtc82x7sNAsHTBw1Ho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "271380736469-hkt0u5m6fvk0eov845kim6phd3f35seg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "271380736469-9lj3j85qaovvlll8ei797qc93nbk5p9i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.beytiarabia.app",
+                "app_store_id": "6443469721"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:271380736469:android:9d614d13f86957a1a3755c",
+        "android_client_info": {
+          "package_name": "com.example.auction.admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "271380736469-hkt0u5m6fvk0eov845kim6phd3f35seg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD57bzQp-wwWq2tZDtc82x7sNAsHTBw1Ho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "271380736469-hkt0u5m6fvk0eov845kim6phd3f35seg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "271380736469-9lj3j85qaovvlll8ei797qc93nbk5p9i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.beytiarabia.app",
+                "app_store_id": "6443469721"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:271380736469:android:6e5778a67be32e96a3755c",
+        "android_client_info": {
+          "package_name": "com.example.auctions.v2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "271380736469-hkt0u5m6fvk0eov845kim6phd3f35seg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD57bzQp-wwWq2tZDtc82x7sNAsHTBw1Ho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "271380736469-hkt0u5m6fvk0eov845kim6phd3f35seg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "271380736469-9lj3j85qaovvlll8ei797qc93nbk5p9i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.beytiarabia.app",
+                "app_store_id": "6443469721"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:271380736469:android:8641646e260364c1a3755c",
+        "android_client_info": {
+          "package_name": "com.mazzraati.app.user"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "271380736469-hkt0u5m6fvk0eov845kim6phd3f35seg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD57bzQp-wwWq2tZDtc82x7sNAsHTBw1Ho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "271380736469-hkt0u5m6fvk0eov845kim6phd3f35seg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "271380736469-9lj3j85qaovvlll8ei797qc93nbk5p9i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.beytiarabia.app",
+                "app_store_id": "6443469721"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:271380736469:android:ea6df8062ca0d6d9a3755c",
+        "android_client_info": {
+          "package_name": "com.mazzraati.vendor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "271380736469-hkt0u5m6fvk0eov845kim6phd3f35seg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD57bzQp-wwWq2tZDtc82x7sNAsHTBw1Ho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "271380736469-hkt0u5m6fvk0eov845kim6phd3f35seg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "271380736469-9lj3j85qaovvlll8ei797qc93nbk5p9i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.beytiarabia.app",
+                "app_store_id": "6443469721"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
