@@ -4,16 +4,12 @@ import 'package:flutter_sixvalley_ecommerce/features/address/controllers/address
 import 'package:flutter_sixvalley_ecommerce/features/auction/controllers/add_auction_controller.dart';
 import 'package:flutter_sixvalley_ecommerce/features/auction/domain/models/auction_model.dart';
 import 'package:flutter_sixvalley_ecommerce/features/auction/screens/auction_list_screen.dart';
-import 'package:flutter_sixvalley_ecommerce/features/auction/widgets/auction_shimmer_widget.dart';
-import 'package:flutter_sixvalley_ecommerce/features/auction/widgets/auction_view_widget.dart';
 import 'package:flutter_sixvalley_ecommerce/features/auth/controllers/auth_controller.dart';
 import 'package:flutter_sixvalley_ecommerce/features/banner/controllers/banner_controller.dart';
 import 'package:flutter_sixvalley_ecommerce/features/banner/widgets/banners_widget.dart';
 import 'package:flutter_sixvalley_ecommerce/features/banner/widgets/footer_banner_slider_widget.dart';
 import 'package:flutter_sixvalley_ecommerce/features/banner/widgets/single_banner_widget.dart';
 import 'package:flutter_sixvalley_ecommerce/features/brand/controllers/brand_controller.dart';
-import 'package:flutter_sixvalley_ecommerce/features/brand/screens/brands_screen.dart';
-import 'package:flutter_sixvalley_ecommerce/features/brand/widgets/brand_list_widget.dart';
 import 'package:flutter_sixvalley_ecommerce/features/cart/controllers/cart_controller.dart';
 import 'package:flutter_sixvalley_ecommerce/features/category/controllers/category_controller.dart';
 import 'package:flutter_sixvalley_ecommerce/features/category/widgets/category_list_widget.dart';
@@ -134,6 +130,8 @@ class _HomePageState extends State<HomePage> {
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: RefreshIndicator(
+          color: Theme.of(context).primaryColor,
+          backgroundColor: Colors.white,
           onRefresh: () async {
             await HomePage.loadData(true);
           },
@@ -150,39 +148,29 @@ class _HomePageState extends State<HomePage> {
                 actions: [
                   Consumer<WishListController>(
                     builder: (context, wishListController, _) {
-                      // Safely getting the wishlist count, defaulting to 0 if the list is null
                       final wishListCount =
                           wishListController.wishList?.length ?? 0;
-
                       return SquareButtonWidget(
-                        image: Images.wishlist, // Image for the wishlist button
-                        title: null, // Localized title
-                        height: 40, // Height of the button
-                        width: 40, // Width of the button
-                        imageSize: 24, // Size of the image inside the button
-                        navigateTo: const WishListScreen(), // Navigation target
-                        count: wishListCount, // Number of items in the wishlist
-                        hasCount: !isGuestMode &&
-                            wishListCount > 0, // Whether to show the count
-
-                        // Additional customizable parameters with default values
-                        padding: EdgeInsets.zero, // Padding inside the button
+                        image: Images.wishlist,
+                        title: null,
+                        height: 40,
+                        width: 40,
+                        imageSize: 24,
+                        navigateTo: const WishListScreen(),
+                        count: wishListCount,
+                        hasCount: !isGuestMode && wishListCount > 0,
+                        padding: EdgeInsets.zero,
                         imagePadding: const EdgeInsets.all(0),
-                        borderRadius: 8.0, // Border radius of the button
-                        backgroundColor: Theme.of(context)
-                            .primaryColor, // Button background color
-                        imageColor: Colors
-                            .white, // Color of the image inside the button
-                        countRadius: 8.0, // Radius of the count indicator
-                        countBackgroundColor: Colors
-                            .red, // Background color of the count indicator
+                        borderRadius: 8.0,
+                        backgroundColor: Theme.of(context).primaryColor,
+                        imageColor: Colors.white,
+                        countRadius: 8.0,
+                        countBackgroundColor: Colors.red,
                         countTextStyle: const TextStyle(
                           color: Colors.white,
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
-                        ), // Text style for the count indicator
-
-                        // Only add the title if it's not null
+                        ),
                       );
                     },
                   ),
