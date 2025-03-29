@@ -6,7 +6,7 @@ class AppConstants {
   static const String slogan = 'E-Commerce Marketplace';
   static const String appVersion = '14.3';
 //   static const String baseUrl = 'https://mazzraati.tptc.com.sa/v5';
-  static const String baseUrl = 'https://mazzraati.com';
+  static const String baseUrl = 'https://mazzraati.gulfcodes.com';
 
   static const String userId = 'userId';
   static const String name = 'name';

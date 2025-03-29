@@ -19,7 +19,7 @@ import 'package:flutter_sixvalley_ecommerce/main.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/app_constants.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
-import 'package:open_file_plus/open_file_plus.dart';
+import 'package:open_file/open_file.dart';
 
 enum SenderType { customer, seller, admin, deliveryMan, unknown }
 

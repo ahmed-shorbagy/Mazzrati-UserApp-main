@@ -14,8 +14,8 @@ import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dar
 import 'package:flutter_sixvalley_ecommerce/main.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/app_constants.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:open_file/open_file.dart';
 import 'package:open_file_manager/open_file_manager.dart';
-import 'package:open_file_plus/open_file_plus.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
