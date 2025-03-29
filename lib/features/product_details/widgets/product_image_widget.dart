@@ -184,36 +184,39 @@ class ProductImageWidget extends StatelessWidget {
                                                   Dimensions.paddingSizeSmall,
                                             ),
                                             InkWell(
-                                                onTap: () {
-                                                  if (productController
-                                                          .sharableLink !=
-                                                      null) {
-                                                    Share.share(
-                                                        productController
-                                                            .sharableLink!);
-                                                  }
-                                                },
-                                                child: Card(
-                                                    elevation: 2,
-                                                    shape: RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                50)),
-                                                    child: Container(
-                                                        width: 40,
-                                                        height: 40,
-                                                        decoration: BoxDecoration(
-                                                            color: Theme.of(context)
-                                                                .cardColor,
-                                                            shape: BoxShape
-                                                                .circle),
-                                                        child: Padding(
-                                                            padding: const EdgeInsets.all(
-                                                                Dimensions
-                                                                    .paddingSizeSmall),
-                                                            child: Image.asset(
-                                                                Images.share,
-                                                                color: Theme.of(context).primaryColor)))))
+                                              onTap: () {
+                                                if (productController
+                                                        .sharableLink !=
+                                                    null) {
+                                                  Share.share(productController
+                                                      .sharableLink!);
+                                                }
+                                              },
+                                              child: Card(
+                                                elevation: 2,
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            50)),
+                                                child: Container(
+                                                  width: 40,
+                                                  height: 40,
+                                                  decoration: BoxDecoration(
+                                                      color: Theme.of(context)
+                                                          .cardColor,
+                                                      shape: BoxShape.circle),
+                                                  child: Padding(
+                                                    padding: const EdgeInsets
+                                                        .all(Dimensions
+                                                            .paddingSizeSmall),
+                                                    child: Image.asset(
+                                                        Images.share,
+                                                        color: Theme.of(context)
+                                                            .primaryColor),
+                                                  ),
+                                                ),
+                                              ),
+                                            )
                                           ])),
                                       Positioned(
                                           top: 10,
