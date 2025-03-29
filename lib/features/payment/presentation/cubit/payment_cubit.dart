@@ -37,7 +37,8 @@ class PaymentCubit extends Cubit<PaymentState> {
   }
 
   // Main function to create payment with PayMob
-  Future<String> payWithPaymob(double amount) async {
+  Future<String> payWithPaymob(double amount,
+      {Map<String, dynamic>? productData}) async {
     emit(PayWithPayMobLoading());
     try {
       // Get user data for the payment process
@@ -60,17 +61,19 @@ class PaymentCubit extends Cubit<PaymentState> {
       // Step 1: Get auth token
       String token = await PaymobManager.getAuthToken();
 
-      // Step 2: Create order on PayMob
+      // Step 2: Create order on PayMob with product data if available
       int orderId = await PaymobManager.createOrder(
-          token: token, amount: (100 * amount).toString());
+          token: token,
+          amount: (100 * amount).toString(),
+          productData: productData);
 
       // Step 3: Get payment key
       String paymentKey = await PaymobManager.getPaymentKey(
-        token: token,
-        orderId: orderId.toString(),
-        amount: (100 * amount).toString(),
-        billingData: billingData,
-      );
+          token: token,
+          orderId: orderId.toString(),
+          amount: (100 * amount).toString(),
+          billingData: billingData,
+          shippingData: productData);
 
       emit(PayWithPayMobSuccess());
       return paymentKey;
@@ -88,6 +91,7 @@ class PaymentCubit extends Cubit<PaymentState> {
     required int sellerId,
     required int customerId,
     required String description,
+    Map<String, dynamic>? additionalData,
   }) async {
     emit(CreateTransactionLoading());
 
@@ -108,7 +112,8 @@ class PaymentCubit extends Cubit<PaymentState> {
         "Content-Type": "application/json",
       };
 
-      Map<String, dynamic> body = {
+      // Process additional data for transaction
+      Map<String, dynamic> transactionData = {
         "amount": amount,
         "type": "credit",
         "description": description,
@@ -118,8 +123,17 @@ class PaymentCubit extends Cubit<PaymentState> {
         "status": "completed",
       };
 
+      // Add any additional fields if provided
+      if (additionalData != null) {
+        transactionData.addAll({
+          "is_organic": additionalData['is_organic'] ?? false,
+          "is_frezed": additionalData['is_frezed'] ?? false,
+          "shipping_type": additionalData['shipping_type'] ?? 'standard',
+        });
+      }
+
       var response = await http.post(Uri.parse(url),
-          headers: headers, body: jsonEncode(body));
+          headers: headers, body: jsonEncode(transactionData));
 
       Map<String, dynamic> data = json.decode(response.body);
 

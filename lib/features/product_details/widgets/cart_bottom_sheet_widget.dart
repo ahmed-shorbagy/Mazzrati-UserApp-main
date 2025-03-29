@@ -1,25 +1,25 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_sixvalley_ecommerce/common/basewidget/custom_button_widget.dart';
 import 'package:flutter_sixvalley_ecommerce/common/basewidget/custom_directionality_widget.dart';
+import 'package:flutter_sixvalley_ecommerce/common/basewidget/custom_image_widget.dart';
+import 'package:flutter_sixvalley_ecommerce/common/basewidget/show_custom_snakbar_widget.dart';
+import 'package:flutter_sixvalley_ecommerce/features/cart/controllers/cart_controller.dart';
 import 'package:flutter_sixvalley_ecommerce/features/cart/domain/models/cart_model.dart';
 import 'package:flutter_sixvalley_ecommerce/features/checkout/screens/checkout_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/features/product/domain/models/product_model.dart';
-import 'package:flutter_sixvalley_ecommerce/features/product_details/widgets/color_selection_widget.dart';
 import 'package:flutter_sixvalley_ecommerce/features/product_details/controllers/product_details_controller.dart';
 import 'package:flutter_sixvalley_ecommerce/features/product_details/domain/models/product_details_model.dart';
+import 'package:flutter_sixvalley_ecommerce/features/product_details/widgets/color_selection_widget.dart';
 import 'package:flutter_sixvalley_ecommerce/features/product_details/widgets/shipping_method_dialog.dart';
 import 'package:flutter_sixvalley_ecommerce/features/shipping/domain/models/shipping_method_model.dart';
 import 'package:flutter_sixvalley_ecommerce/helper/price_converter.dart';
 import 'package:flutter_sixvalley_ecommerce/helper/product_helper.dart';
 import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
-import 'package:flutter_sixvalley_ecommerce/features/cart/controllers/cart_controller.dart';
 import 'package:flutter_sixvalley_ecommerce/theme/controllers/theme_controller.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/custom_themes.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
-import 'package:flutter_sixvalley_ecommerce/common/basewidget/custom_button_widget.dart';
-import 'package:flutter_sixvalley_ecommerce/common/basewidget/custom_image_widget.dart';
-import 'package:flutter_sixvalley_ecommerce/common/basewidget/show_custom_snakbar_widget.dart';
 import 'package:provider/provider.dart';
 
 class CartBottomSheetWidget extends StatefulWidget {
@@ -95,7 +95,7 @@ class CartBottomSheetWidgetState extends State<CartBottomSheetWidget> {
                     .trim());
               }
               String variationType = '';
-              variationType = variantName!;
+              variationType = variantName ?? '';
               for (var variation in variationList) {
                 variationType = '$variationType-$variation';
               }
@@ -208,20 +208,36 @@ class CartBottomSheetWidgetState extends State<CartBottomSheetWidget> {
                                               borderRadius:
                                                   BorderRadius.circular(5),
                                               child: CustomImageWidget(
-                                                  image: (widget.product!
-                                                                  .colors !=
-                                                              null &&
-                                                          widget.product!.colors!
-                                                              .isNotEmpty &&
-                                                          widget.product!
-                                                                  .imagesFullUrl !=
-                                                              null &&
+                                                  image: (widget.product!.colors != null &&
                                                           widget
                                                               .product!
-                                                              .imagesFullUrl!
+                                                              .colors!
+                                                              .isNotEmpty &&
+                                                          colorWiseSelectedImage !=
+                                                              null &&
+                                                          colorWiseSelectedImage
                                                               .isNotEmpty)
-                                                      ? '$colorWiseSelectedImage'
-                                                      : '${widget.product!.thumbnailFullUrl?.path}'))),
+                                                      ? colorWiseSelectedImage
+                                                      : (widget.product!.thumbnailFullUrl?.path !=
+                                                              null)
+                                                          ? widget
+                                                              .product!
+                                                              .thumbnailFullUrl!
+                                                              .path!
+                                                          : (widget.product!.thumbnail !=
+                                                                  null)
+                                                              ? widget.product!
+                                                                  .thumbnail!
+                                                              : (widget.product!.images != null &&
+                                                                      widget
+                                                                          .product!
+                                                                          .images!
+                                                                          .isNotEmpty)
+                                                                  ? widget
+                                                                      .product!
+                                                                      .images!
+                                                                      .first
+                                                                  : ''))),
                                       widget.product!.discount! > 0
                                           ? Container(
                                               width: 100,

@@ -44,18 +44,40 @@ class PaymobManager {
   static Future<int> createOrder({
     required String token,
     required String amount,
+    Map<String, dynamic>? productData,
   }) async {
     final url = Uri.parse('$_paymobBaseUrl/ecommerce/orders');
     final headers = {
       'Content-Type': 'application/json',
       "Authorization": "Bearer $token"
     };
+
+    // Create items array with product data if available
+    List<Map<String, dynamic>> items = [];
+    if (productData != null && productData.containsKey('name')) {
+      String name = productData['name'] is String
+          ? productData['name']
+          : productData['name'] is List
+              ? productData['name'][0]
+              : 'Product';
+
+      items.add({
+        "name": name,
+        "amount_cents": amount,
+        "description": productData['description'] ?? "",
+        "quantity": productData['quantity'] ?? 1,
+        "is_organic": productData['is_organic'] ?? false,
+        "is_refrigerated": productData['is_frezed'] ?? false,
+      });
+    }
+
     final body = json.encode({
       "auth_token": token,
-      "delivery_needed": "false",
+      "delivery_needed":
+          productData?['shipping_type'] == 'refrigerated' ? "true" : "false",
       "amount_cents": amount,
       "currency": "SAR",
-      "items": [],
+      "items": items.isEmpty ? [] : items,
     });
 
     try {
@@ -85,9 +107,21 @@ class PaymobManager {
     required String orderId,
     required String amount,
     required Map<String, dynamic> billingData,
+    Map<String, dynamic>? shippingData,
   }) async {
     final url = Uri.parse('$_paymobBaseUrl/acceptance/payment_keys');
     final headers = {'Content-Type': 'application/json'};
+
+    // Add shipping info if this product requires refrigerated shipping
+    Map<String, dynamic> finalBillingData = Map.from(billingData);
+    if (shippingData != null &&
+        shippingData['shipping_type'] == 'refrigerated') {
+      finalBillingData['shipping_details'] = {
+        'shipping_method': 'refrigerated',
+        'shipping_capacity': shippingData['shipping_capacity'] ?? 1,
+        'minimum_delivery_limit': shippingData['minimum_delivery_limit'] ?? 1,
+      };
+    }
 
     final body = json.encode({
       "auth_token": token,
@@ -97,7 +131,7 @@ class PaymobManager {
       "order_id": orderId,
       "lock_order_when_paid": "false",
       "integration_id": _integrationId,
-      "billing_data": billingData,
+      "billing_data": finalBillingData,
     });
 
     try {

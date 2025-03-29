@@ -845,5 +845,14 @@
   "otp_sent_successfully": "تم ارسال كود التحقق بنجاح",
   "otp_sent_failed": "فشل في ارسال كود التحقق",
   "otp_verified_successfully": "تم التحقق من الكود بنجاح",
-  "otp_verified_failed": "فشل في التحقق من الكود"
+  "otp_verified_failed": "فشل في التحقق من الكود",
+  "size": "الحجم",
+  "shipping_capacity": "سعة الشحن",
+  "refrigerated": "مبرد",
+  "organic": "عضوي",
+  "yes": "نعم",
+  "no": "لا",
+  "product_specifications": "مواصفات المنتج",
+  "unit": "وحدة",
+  "meta_title": "العنوان الوصفي"
 }

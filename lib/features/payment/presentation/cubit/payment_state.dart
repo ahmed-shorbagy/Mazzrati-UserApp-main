@@ -51,14 +51,3 @@ class CreateTransactionFailure extends PaymentState {
   @override
   List<Object> get props => [error];
 }
-
-class AddAmountToOwnerWalletLoadign extends PaymentState {}
-
-class AddAmountToOwnerWalletSuccess extends PaymentState {}
-
-class AddAmountToOwnerWalletFailure extends PaymentState {
-  final String error;
-  AddAmountToOwnerWalletFailure({required this.error}) {
-    log(name: "Add Amount To Owner Wallet Failure : ", error);
-  }
-}

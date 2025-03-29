@@ -1,67 +1,72 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_sixvalley_ecommerce/features/product_details/screens/specification_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
-import 'package:flutter_sixvalley_ecommerce/theme/controllers/theme_controller.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/custom_themes.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
-import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
-
 
 class ProductSpecificationWidget extends StatelessWidget {
   final String productSpecification;
 
-
-  const ProductSpecificationWidget({super.key, required this.productSpecification});
+  const ProductSpecificationWidget(
+      {super.key, required this.productSpecification});
 
   @override
   Widget build(BuildContext context) {
+    // Check if the specification is in JSON format
+    bool isJsonFormat = false;
+    try {
+      if (productSpecification.startsWith('{') &&
+          productSpecification.endsWith('}')) {
+        jsonDecode(productSpecification);
+        isJsonFormat = true;
+      }
+    } catch (e) {
+      // Not valid JSON, will display as HTML
+    }
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault),
-      child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text(getTranslated('product_specification', context)??'',style: textMedium ),
-        const SizedBox(height: Dimensions.paddingSizeExtraSmall),
+    // If it's in JSON format, we'll skip this widget as the attributes widget will handle it
+    if (isJsonFormat) {
+      return const SizedBox();
+    }
 
-        Column(children: [
-          Stack(children: [
-            Container(
-              height: (productSpecification.isNotEmpty && productSpecification.length > 400) ? 150 : null,
-              padding: const EdgeInsets.all(Dimensions.paddingSizeSmall).copyWith(bottom: 0),
-              child: SingleChildScrollView(
-                physics: const NeverScrollableScrollPhysics(),
-                child: HtmlWidget(productSpecification,  onTapUrl: (String url) {
-                  return launchUrl(Uri.parse(url),mode: LaunchMode.externalApplication);
-                }),
-              ),
-            ),
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Padding(
+        padding:
+            const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeSmall),
+        child: Text(getTranslated('specification', context) ?? "",
+            style: textMedium),
+      ),
+      const SizedBox(height: Dimensions.paddingSizeExtraSmall),
 
-            if( (productSpecification.isNotEmpty && productSpecification.length > 400)) Positioned.fill(child: Align(
-              alignment: Alignment.bottomCenter, child: Container(
-              decoration: BoxDecoration(gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [
-                Theme.of(context).cardColor.withOpacity(0),
-                Theme.of(context).cardColor,
-              ])),
-              height: 55,
-            ),
-            )),
+      // Display raw data for debugging
+      // Container(
+      //   margin: const EdgeInsets.all(Dimensions.paddingSizeExtraSmall),
+      //   padding: const EdgeInsets.all(Dimensions.paddingSizeSmall),
+      //   width: double.infinity,
+      //   decoration: BoxDecoration(
+      //     color: ColorResources.getIconBg(context),
+      //     borderRadius: BorderRadius.circular(5),
+      //   ),
+      //   child: Text(
+      //     'Raw Data: $productSpecification',
+      //     style: textRegular.copyWith(fontSize: 12),
+      //   ),
+      // ),
 
-          ]),
-
-          if(productSpecification.isNotEmpty && productSpecification.length > 400)
-            Center(child: InkWell(
-              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => SpecificationScreen(specification: productSpecification))),
-              child: Text(getTranslated('view_full_detail', context)!, style: titleRegular.copyWith(
-                color: Provider.of<ThemeController>(context, listen: false).darkTheme
-                    ? Colors.white
-                    : Theme.of(context).primaryColor,
-              )),
-            )),
-
-
-        ]),
-      ]),
-    );
+      // Original HTML content
+      Container(
+        padding: const EdgeInsets.all(Dimensions.paddingSizeSmall),
+        decoration: BoxDecoration(
+          color: Theme.of(context).highlightColor,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: HtmlWidget(
+          productSpecification,
+          textStyle: textRegular,
+        ),
+      ),
+    ]);
   }
 }

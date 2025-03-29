@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sixvalley_ecommerce/common/basewidget/custom_directionality_widget.dart';
+import 'package:flutter_sixvalley_ecommerce/common/basewidget/rating_bar_widget.dart';
 import 'package:flutter_sixvalley_ecommerce/features/product_details/controllers/product_details_controller.dart';
 import 'package:flutter_sixvalley_ecommerce/features/product_details/domain/models/product_details_model.dart';
 import 'package:flutter_sixvalley_ecommerce/features/review/controllers/review_controller.dart';
@@ -11,7 +12,6 @@ import 'package:flutter_sixvalley_ecommerce/theme/controllers/theme_controller.d
 import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/custom_themes.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
-import 'package:flutter_sixvalley_ecommerce/common/basewidget/rating_bar_widget.dart';
 import 'package:provider/provider.dart';
 
 class ProductTitleWidget extends StatelessWidget {
@@ -47,12 +47,21 @@ class ProductTitleWidget extends StatelessWidget {
                             CustomDirectionalityWidget(
                               child: Text(
                                   '${startingPrice != null ? PriceConverter.convertPrice(context, startingPrice, discount: productModel!.discount, discountType: productModel!.discountType) : ''}'
-                                  '${endingPrice != null ? ' - ${PriceConverter.convertPrice(context, endingPrice, discount: productModel!.discount, discountType: productModel!.discountType)}' : ''}'
-                                  "   (${productModel!.unit})",
+                                  '${endingPrice != null ? ' - ${PriceConverter.convertPrice(context, endingPrice, discount: productModel!.discount, discountType: productModel!.discountType)}' : ''}',
                                   style: titilliumBold.copyWith(
                                       color: ColorResources.getPrimary(context),
                                       fontSize: Dimensions.fontSizeLarge)),
                             ),
+                            const SizedBox(width: 5),
+                            if (productModel!.unit != null &&
+                                productModel!.unit!.isNotEmpty)
+                              Text(
+                                productModel!.unit!,
+                                style: titilliumRegular.copyWith(
+                                  color: ColorResources.getTextTitle(context),
+                                  fontSize: Dimensions.fontSizeDefault,
+                                ),
+                              ),
                             if (productModel!.discount != null &&
                                 productModel!.discount! > 0) ...[
                               const SizedBox(

@@ -13,6 +13,7 @@ class PaymentScreen extends StatefulWidget {
   final int orderId;
   final int sellerId;
   final String productName;
+  final Map<String, dynamic>? additionalData;
 
   const PaymentScreen({
     super.key,
@@ -21,6 +22,7 @@ class PaymentScreen extends StatefulWidget {
     required this.orderId,
     required this.sellerId,
     required this.productName,
+    this.additionalData,
   });
 
   @override
@@ -174,14 +176,26 @@ class _PaymentScreenState extends State<PaymentScreen>
     try {
       if (!isPaymentProcessing) return; // Prevent duplicate handling
 
-      // Record transaction
+      // Record transaction with additional data
+      Map<String, dynamic> extraData = widget.additionalData ?? {};
+
+      // Create enriched description with product attributes if available
+      String enrichedDescription = "Payment for: ${widget.productName}";
+      if (extraData.containsKey('is_organic') &&
+          extraData['is_organic'] == true) {
+        enrichedDescription += " (Organic)";
+      }
+      if (extraData.containsKey('is_frezed') &&
+          extraData['is_frezed'] == true) {
+        enrichedDescription += " (Refrigerated)";
+      }
+
       await context.read<PaymentCubit>().createTransaction(
             amount: widget.amount,
             orderId: widget.orderId,
             sellerId: widget.sellerId,
-            customerId:
-                -1, // Will be replaced with actual customer ID from shared prefs
-            description: "Payment for: ${widget.productName}",
+            customerId: extraData['customerId'] ?? -1,
+            description: enrichedDescription,
           );
 
       Fluttertoast.showToast(

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sixvalley_ecommerce/common/basewidget/custom_app_bar_widget.dart';
+import 'package:flutter_sixvalley_ecommerce/common/basewidget/title_row_widget.dart';
+import 'package:flutter_sixvalley_ecommerce/features/home/shimmers/product_details_shimmer.dart';
 import 'package:flutter_sixvalley_ecommerce/features/product/controllers/product_controller.dart';
 import 'package:flutter_sixvalley_ecommerce/features/product/controllers/seller_product_controller.dart';
 import 'package:flutter_sixvalley_ecommerce/features/product_details/controllers/product_details_controller.dart';
 import 'package:flutter_sixvalley_ecommerce/features/product_details/widgets/bottom_cart_widget.dart';
+import 'package:flutter_sixvalley_ecommerce/features/product_details/widgets/product_attributes_widget.dart';
 import 'package:flutter_sixvalley_ecommerce/features/product_details/widgets/product_image_widget.dart';
 import 'package:flutter_sixvalley_ecommerce/features/product_details/widgets/product_specification_widget.dart';
 import 'package:flutter_sixvalley_ecommerce/features/product_details/widgets/product_title_widget.dart';
@@ -12,14 +16,11 @@ import 'package:flutter_sixvalley_ecommerce/features/product_details/widgets/rev
 import 'package:flutter_sixvalley_ecommerce/features/product_details/widgets/shop_info_widget.dart';
 import 'package:flutter_sixvalley_ecommerce/features/product_details/widgets/youtube_video_widget.dart';
 import 'package:flutter_sixvalley_ecommerce/features/review/controllers/review_controller.dart';
-import 'package:flutter_sixvalley_ecommerce/common/basewidget/custom_app_bar_widget.dart';
-import 'package:flutter_sixvalley_ecommerce/features/home/shimmers/product_details_shimmer.dart';
 import 'package:flutter_sixvalley_ecommerce/features/review/widgets/review_section.dart';
 import 'package:flutter_sixvalley_ecommerce/features/shop/screens/shop_screen.dart';
+import 'package:flutter_sixvalley_ecommerce/features/shop/widgets/shop_product_view_list.dart';
 import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
-import 'package:flutter_sixvalley_ecommerce/common/basewidget/title_row_widget.dart';
-import 'package:flutter_sixvalley_ecommerce/features/shop/widgets/shop_product_view_list.dart';
 import 'package:provider/provider.dart';
 
 class ProductDetails extends StatefulWidget {
@@ -89,6 +90,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 averageRatting: details
                                         .productDetailsModel?.averageReview ??
                                     "0"),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: Dimensions.paddingSizeSmall),
+                              child: ProductAttributesWidget(
+                                  product: details.productDetailsModel),
+                            ),
                             const ReviewAndSpecificationSectionWidget(),
                             details.isReviewSelected
                                 ? Column(children: [
@@ -118,7 +125,6 @@ class _ProductDetailsState extends State<ProductDetails> {
                                               ),
                                             )
                                           : const SizedBox(),
-
                                       (details.productDetailsModel?.videoUrl !=
                                                   null &&
                                               details.isValidYouTubeUrl(details
@@ -128,22 +134,30 @@ class _ProductDetailsState extends State<ProductDetails> {
                                               url: details.productDetailsModel!
                                                   .videoUrl)
                                           : const SizedBox(),
-
-                                      // (details.productDetailsModel != null ) ?
-                                      // ShopInfoWidget(sellerId: details.productDetailsModel!.addedBy == 'seller'? details.productDetailsModel!.userId.toString() : "0") : const SizedBox.shrink(),
-
-                                      // const SizedBox(height: Dimensions.paddingSizeLarge,),
-
-                                      // Container(
-                                      //     padding: const EdgeInsets.only(
-                                      //         top: Dimensions.paddingSizeLarge,
-                                      //         bottom: Dimensions
-                                      //             .paddingSizeDefault),
-                                      //     decoration: BoxDecoration(
-                                      //         color:
-                                      //             Theme.of(context).cardColor),
-                                      //     child: const PromiseWidget()),
-
+                                      (details.productDetailsModel?.seller !=
+                                              null)
+                                          ? ShopInfoWidget(
+                                              sellerId: details
+                                                          .productDetailsModel!
+                                                          .addedBy ==
+                                                      'seller'
+                                                  ? details.productDetailsModel!
+                                                      .userId
+                                                      .toString()
+                                                  : "0")
+                                          : const SizedBox.shrink(),
+                                      const SizedBox(
+                                        height: Dimensions.paddingSizeLarge,
+                                      ),
+                                      Container(
+                                          padding: const EdgeInsets.only(
+                                              top: Dimensions.paddingSizeLarge,
+                                              bottom: Dimensions
+                                                  .paddingSizeDefault),
+                                          decoration: BoxDecoration(
+                                              color:
+                                                  Theme.of(context).cardColor),
+                                          child: const PromiseWidget()),
                                       _ProductDetailsProductListWidget(
                                           scrollController: scrollController),
                                     ],
